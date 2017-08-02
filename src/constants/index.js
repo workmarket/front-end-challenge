@@ -1,2 +1,3 @@
-// Export constants here
-// export const COOL_CONSTANT = 'COOL_CONSTANT';
+export const REQUEST_REPOS = 'REQUEST_REPOS';
+export const RECEIVE_REPOS = 'RECEIVE_REPOS';
+export const IS_FETCHING = 'IS_FETCHING';

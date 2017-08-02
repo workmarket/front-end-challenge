@@ -50,7 +50,7 @@ module.exports = {
 		}),
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
-			title: 'WM Front End Code Challenge',
+			title: 'Facebook Repos',
 			template: path.resolve('./playground.ejs'),
 		}),
 	],

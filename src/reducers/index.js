@@ -1,25 +1,31 @@
 import { combineReducers } from 'redux';
-// import * as types from '../constants';
+import * as types from '../constants';
 // import {
-// 	Person,
+// 	RepoList,
 // } from '../models';
 
-// const initialUserState = new Person();
+// const initialState = new RepoList();
+const initialState = {
+  isFetching: false,
+  data: [],
+};
 
-const emptyReducer = (state = '', {
-	type,
-	/* value, */
-}) => {
-	switch (type) {
-	// case types.CHANGE_FIELD:
-	// 	return value;
-	default:
-		return state;
-	}
+const repoList = (state = initialState, action) => {
+  // console.log(state);
+  // console.log(action);
+  switch (action.type) {
+  case types.RECEIVE_REPOS:
+    return Object.assign({}, state, {
+      isFetching: false,
+      data: action.repos,
+    });
+  default:
+    return state;
+  }
 };
 
 const rootReducer = combineReducers({
-	emptyReducer,
+  repoList,
 });
 
 export default rootReducer;

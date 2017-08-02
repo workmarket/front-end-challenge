@@ -1,14 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import Playground from '../Playground';
+import RepoList from '../RepoList';
 
 const Root = ({ store }) => (
-	<Provider store={ store }>
-		<div>
-			<h1>WorkMarket Front End Challenge</h1>
-			<Playground />
-		</div>
+	<Provider store={store}>
+		<RepoList />
 	</Provider>
 );
 
