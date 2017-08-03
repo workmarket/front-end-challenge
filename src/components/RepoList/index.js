@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import Repo from '../Repo';
 import * as actions from '../../actions';
 import styles from './RepoList.scss';
 
@@ -27,31 +28,7 @@ class RepoList extends Component {
     )
     : (
       <div className={styles.list}>
-        {
-          repoList.map(repo => (
-            <div className={styles.card} key={repo.id}>
-              <div className={styles.name}>
-                <a href={repo.html_url}><span>{repo.name}</span></a>
-              </div>
-              <div className={styles.updated}>
-                <span>Updated: </span>
-                <span>{repo.updated_at}</span>
-              </div>
-              <div className={styles.contributors}>
-                <span>List of contributors (center of card, fetched from contributors_url): </span>
-                <span>First page only. Need to be fetched seperately</span>
-              </div>
-              <div className={styles.stars}>
-                <span>Stars: </span>
-                <span>{repo.stargazers_count}</span>
-              </div>
-              <div className={styles.forks}>
-                <span>Forks: </span>
-                <span>{repo.forks}</span>
-              </div>
-            </div>
-          ))
-        }
+        {repoList.map(repo => <Repo key={repo.id} data={repo} />)}
       </div>
     );
   }

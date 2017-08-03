@@ -23,7 +23,11 @@ export const fetchRepoList = () => {
   return (dispatch) => {
     dispatch(requestRepos());
 
-    return fetch('https://api.github.com/orgs/facebook/repos')
+    return fetch('https://api.github.com/orgs/facebook/repos', {
+      headers: new Headers({
+        Authorization: `token ${'465778a84ba5d83e5e37aac5378a4cbdb7f05b0a'}`,
+      }),
+    })
       .then(response =>
         response.json().then(json => ({
           status: response.status,
