@@ -1,0 +1,45 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  max-width: 32%;
+  background-color: #ffffff;
+  padding: 1em;
+  margin: 1em 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+
+  @media (max-width: 768px) {
+    max-width: 49%;
+  }
+  @media (max-width: 480px) {
+    max-width: 100%;
+  }
+}
+
+.name {
+  width: 50%;
+  padding: 1em 0;
+}
+
+.updated {
+  composes: name;
+}
+
+.contributors {
+  width: 100%;
+  padding: 1em 0;
+}
+
+.forks {
+  composes: name;
+}
+
+.stars {
+  composes: name;
+}

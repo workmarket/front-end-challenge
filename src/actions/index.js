@@ -13,12 +13,26 @@ export const receiveRepos = (data) => {
   };
 };
 
+export const receiveError = () => {
+  return {
+    type: types.RECEIVE_ERROR,
+  };
+};
+
 export const fetchRepoList = () => {
   return (dispatch) => {
     dispatch(requestRepos());
 
     return fetch('https://api.github.com/orgs/facebook/repos')
-      .then(response => response.json())
-      .then(json => dispatch(receiveRepos(json)));
+      .then(response =>
+        response.json().then(json => ({
+          status: response.status,
+          json,
+        }),
+      ))
+      .then(({ status, json }) => {
+        if (status >= 400) return dispatch(receiveError());
+        return dispatch(receiveRepos(json));
+      });
   };
 };

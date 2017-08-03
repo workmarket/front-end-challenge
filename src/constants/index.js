@@ -1,3 +1,4 @@
 export const REQUEST_REPOS = 'REQUEST_REPOS';
 export const RECEIVE_REPOS = 'RECEIVE_REPOS';
 export const IS_FETCHING = 'IS_FETCHING';
+export const RECEIVE_ERROR = 'RECEIVE_ERROR';
