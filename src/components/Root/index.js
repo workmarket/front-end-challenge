@@ -4,13 +4,13 @@ import { Provider } from 'react-redux';
 import RepoList from '../RepoList';
 
 const Root = ({ store }) => (
-	<Provider store={store}>
-		<RepoList />
-	</Provider>
+  <Provider store={store}>
+    <RepoList />
+  </Provider>
 );
 
 Root.propTypes = {
-	store: PropTypes.object.isRequired, // eslint-disable-line
+  store: PropTypes.shape({}).isRequired,
 };
 
 export default Root;

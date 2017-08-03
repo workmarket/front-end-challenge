@@ -1,10 +1,6 @@
 import { combineReducers } from 'redux';
 import * as types from '../constants';
-// import {
-// 	RepoList,
-// } from '../models';
 
-// const initialState = new RepoList();
 const initialState = {
   isFetching: false,
   data: [],

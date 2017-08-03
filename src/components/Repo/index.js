@@ -27,13 +27,13 @@ class Repo extends Component {
   }
 
   fetchContributors = (url) => {
-    if (url && url.length /* === 'https://api.github.com/repos/facebook/codemod/contributors' */) {
+    if (url && url.length) {
       this.setState(() => ({ loadingContributors: true }));
 
       fetch(url, {
-        headers: new Headers({
-          Authorization: `token ${'465778a84ba5d83e5e37aac5378a4cbdb7f05b0a'}`,
-        }),
+        // headers: new Headers({
+        //   Authorization: `token ${'put token here'}`,
+        // }),
       })
       .then(response =>
         response.json().then(json => ({
@@ -53,7 +53,6 @@ class Repo extends Component {
   render = () => {
     const { data } = this.props;
     const { contributors, contributorsError, loadingContributors } = this.state;
-    console.log(this.state.loadingContributors);
 
     return (
       <div className={styles.card}>
