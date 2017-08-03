@@ -1,55 +1,15 @@
 # WorkMarket Front End Coding Challenge
 
-Hi 👋! If you're reading this, that means you've been asked to complete a coding assessment as a part of WorkMarket's interview process. Nice one!
+**Notes**:
+I ran up against a self imposed time limit, here are some decisions I made to help me complete the assignment on time:
+- Omitted unit tests as there was no test runner setup (loved the rest of the webpack/babel/package.json setup though, thanks!). Honestly would not have wanted that many as I am not in the habit of writing tests for my react components (using something like Enzyme). Wanted to add tests for my the util function and for the redux reducers.
+- Was interested to see the /models setup provided for the immutable data structures and state. I currently use Nuclear.js at work, which comes with Immutable.js built-in for the flux store, and love it. I didn't invest the time up front to setup the immutable store, and ran out of time to do that refactor.
+- I also chose to do the contributors_list API call in componentDidMount() for each repo card instance. The list of contributors per repo could easily have been added to the Redux store, but thought I would demonstrate an alternative architecture. I usually do not put 100% of my app state into Redux, only state that belongs to, or needs to be shared, across multiple components. This app/assignment is simplified, so also wasn't worried about the components mounting/unmounting frequently and sending too frequent API calls.
 
-<div align="center">
-<img src="https://d1qpyd3pu6qx6u.cloudfront.net/5a25905de1c91d5eadca0f68471faf55%2F565x0xwidth%2F75%2Fhttp%2Flarkable.com%2Fuloop%2Fr%3D305%2Fgif%2Fwp-content%2Fuploads%2F2014%2F01%2Fstep_brothers-70150.jpg" width="250" />
-</div>
-
-
-This challenge will test your skills with JS fundamentals, React (&, optionally, Redux), as well as your ability to efficiently interact with APIs.
-
-Here's what you'll be doing:
-
-1. Given a Github organization (e.g. [Facebook](https://github.com/facebook/)), use Github's API to retrieve their public repos. You only need to worry about displaying the first page of results, so ignore pagination.
-  - If a network error occurs, display an error message
-  - While network request is in progress, display a simple "Loading" message
-2. For each repo, display a card. Contents of the card are:
-  - **Top Left**: The name of the repo as a link to the repo itself.
-  - **Top Right**: The time of last update to the repo, in a nice and readable format (e.g. `2 hours ago`).
-  - **Bottom Left**: The number of forks created for that repo.
-  - **Bottom Right**: The number of stars for that repo.
-3. Within the center of each card, display the repo's contributors.
-  - Contributors for each repo has to be fetched separately (see `contributors_url` property in the response for each repo).
-  - Again, do not worry about pagination. Just display the first page returned.
-4. Make this thing responsive! Use float, flexbox, grid, whatever you want, but have the cards collapse down to a single one for smaller screen sizes. Exact pixel widths / breakpoints don't really matter, just make sure it doesn't look janky!
-
-Sound good? Cool. **Here's what we'll be looking for**:
-
-- Efficient data fetching from Github API
-- Efficient state management
-- React data flow
-- React component organization
-- Understanding of React lifecycle methods
-- Performant React rendering
-- Code quality, readability, and DRY-ness
+Those were some tradeoffs I made, otherwise:
+- Added (S)CSS modules for styling components. This is currently my preferred method for styling with React; it prevents working in the global scope (the biggest problem with CSS). I am interested in using some css-in-js approach (JS being much better to work with than CSS), but I feel like none of the current solutions are quite there, so I'm holding off for now.
+- Added Moment.js dependency for formatting the dates to be human readable. This is my preferred way to work with Dates in javascript, and although the inclusion of that dependency for one util function is overkill, in any significantly sized project it is well worth the dependency.
+- I left a few commented out lines of code in the two fetch() calls, where you can place an API token for GitHub to be included in the request to https://api.github.com. Normally I would not leave useless comments like this, but just did it for convenience sake when you want to run the project, as the rate limiting for GitHub without token authentication is pretty severe. (I also expired my personal token in the git commit history).
 
 
-**Here's what we don't care too much about**:
-
-- Pixel perfect UI
-- Pagination (as stated above)
-
-**Some other notes**:
-
-- We've set up a nice little playground for you to get you started. It comes with some dependencies (`yarn install`), but feel free to add, remove, or change those. Also feel free to completely change directory structure if you have a different style for project scaffolding.
-- React hot reloading has been set up for both UI and reducers. Don't worry about doing an actual build, we'll just run the playground with `yarn watch` once you've submitted.
-- Don't want to use Redux for state management? No worries! Go crazy with whatever package you want. Don't want to use anything for state management at all? Fine with us!
-- We've already configured webpack for you (just run `yarn watch`). We've also already configured babel for you if you want to use the latest and greatest ES7/8/whatever. The config is in `.babelrc`, feel free to modify it.
-- There's a `.eslintrc` file includes. Ignore if you want. We're sticklers for code styling, but you don't have to be.
-
-**How to Submit**
-
-You can get started by forking the repo and making code changes in your fork.
-
-All done? 🔥! You can submit your work by opening a pull request against our upstream repository.
+If you're not happy with any of the tradeoffs/simplifications I made, just let me know and I will gladly spend the time to augment the assignment. Thanks!
