@@ -10,9 +10,7 @@ const store = configureStore();
 const render = (Component) => {
 	ReactDOM.render(
 		<AppContainer>
-			<Component
-				store={ store }
-			/>
+			<Component store={store} />
 		</AppContainer>,
 		document.getElementById('app'),
 	);

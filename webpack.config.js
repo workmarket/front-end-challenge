@@ -12,34 +12,42 @@ module.exports = {
 	// 	filename: '[name].js',
 	// },
 	entry: [
-		'webpack-dev-server/client?http://localhost:3000',
-		'webpack/hot/only-dev-server',
-		'react-hot-loader/patch',
-		'babel-polyfill',
-		paths.playground,
+  'webpack-dev-server/client?http://localhost:3000',
+  'webpack/hot/only-dev-server',
+  'react-hot-loader/patch',
+  'babel-polyfill',
+  paths.playground,
 	],
 	devtool: 'eval',
-	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				include: [
-					paths.playground,
-				],
-				exclude: [
-					path.resolve('./node_modules'),
-				],
-				use: [
-					{
-						loader: 'react-hot-loader/webpack',
-					},
-					{
-						loader: 'babel-loader',
-					},
-				],
-			},
-		],
-	},
+  module: {
+  rules: [
+    {
+      test: /\.js$/,
+      include: [
+        paths.playground,
+      ],
+      exclude: [
+        path.resolve('./node_modules'),
+      ],
+      use: [
+        {
+          loader: 'react-hot-loader/webpack',
+        },
+        {
+          loader: 'babel-loader',
+        },
+      ],
+    },
+    {
+      test: /\.scss$/,
+      use: [
+        'style-loader',
+        'css-loader?modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+        'sass-loader',
+      ],
+    },
+  ],
+  },
 	plugins: [
 		new webpack.NamedModulesPlugin(),
 		new webpack.DefinePlugin({
@@ -50,7 +58,7 @@ module.exports = {
 		}),
 		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
-			title: 'WM Front End Code Challenge',
+			title: 'Facebook Repos',
 			template: path.resolve('./playground.ejs'),
 		}),
 	],

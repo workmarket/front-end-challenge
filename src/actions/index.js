@@ -1,11 +1,42 @@
 import * as types from '../constants';
 
-const makeActionCreator = (type, ...argNames) => (...args) => {
-	const action = { type };
+export const requestRepos = () => {
+  return {
+    type: types.REQUEST_REPOS,
+  };
+};
 
-	argNames.forEach((arg, index) => {
-		action[argNames[index]] = args[index];
-	});
+export const receiveRepos = (data) => {
+  return {
+    type: types.RECEIVE_REPOS,
+    repos: data,
+  };
+};
 
-	return action;
+export const receiveError = () => {
+  return {
+    type: types.RECEIVE_ERROR,
+  };
+};
+
+export const fetchRepoList = () => {
+  return (dispatch) => {
+    dispatch(requestRepos());
+
+    return fetch('https://api.github.com/orgs/facebook/repos', {
+      // headers: new Headers({
+      //   Authorization: `token ${'put token here'}`,
+      // }),
+    })
+      .then(response =>
+        response.json().then(json => ({
+          status: response.status,
+          json,
+        }),
+      ))
+      .then(({ status, json }) => {
+        if (status >= 400) return dispatch(receiveError());
+        return dispatch(receiveRepos(json));
+      });
+  };
 };
